@@ -61,11 +61,10 @@ APP_ID 和 APP_SECRET 请联系稿定运营获取。
 
 ``` json
 {
-    "content": '{"sourceImage":"https://st-gdx.dancf.com/gaodingx/mattings/undefined/images/20180626-171051-2.png","imageHeight":0,"imageWidth":0,"backgroundColor":null,"featheringRadius":0,"brushSize":30,"lines":[]}',
-    "last_save_ip": "127.0.0.1",
-    "last_ua": "curl/1.7"
+  "content": "{\"sourceImage\":\"https://st-gdx.dancf.com/gaodingx/mattings/undefined/images/20180626-171051-2.png\",\"imageHeight\":0,\"imageWidth\":0,\"backgroundColor\":null,\"featheringRadius\":0,\"brushSize\":30,\"lines\":[]}",
+  "last_save_ip": "127.0.0.1",
+  "last_ua": "curl/1.7"
 }
-
 ```
 
 ### 请求抠图 - PostMattingsIdImages
@@ -106,7 +105,7 @@ APP_ID 和 APP_SECRET 请联系稿定运营获取。
 
 #### content 结构示例
 
-``` json
+``` js
 {
     "sourceImage": "https://xxx.jpg", // 图片 URL
     "imageWidth": 100, // 图片宽度
