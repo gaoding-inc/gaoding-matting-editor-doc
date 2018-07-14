@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gaoding Matting editor demo</title>
+    <link rel="stylesheet" href="https://unpkg.com/@gaoding/matting-editor@0.2.6/dist/matting-editor.min.css">
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/lodash@4.17.10/lodash.js"></script>
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+    <script>window["lodash"] = window._;</script>
+    <script src="https://unpkg.com/@gaoding/matting-editor@0.2.6/dist/matting-editor.min.js"></script>
+    <style>
+    .matting-brush button{
+        border: 0;
+        outline: 0;
+    }
+    .external-tools {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 10px;
+        z-index: 1;
+    }
+    .external-tools > .btn {
+        border: 1px solid #ddd;
+        color: #666;
+        font-size: 14px;
+        padding: 1.4em
+    }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="external-tools">
+        <label for="uploadFile">上传图片</label>
+        <input id="uploadFile" type="file" class="btn" @change="uploadByFile($event)"></input>
+        <button class="btn" @click="uploadByURL">URL导入</button>
+    </div>
+    <matting-editor ref="mattingEditor" :options="mattingEditorOptions"></matting-editor>
+    <matting-tools v-if="mattingEditor" :matting="mattingEditor"></matting-tools>
+</div>
+
+<script>
+window.app = new Vue({
+    el: '#app',
+    data() {
+        return {
+            mattingEditorOptions: {
+                uploadImage: this.uploadImage
+            },
+            mattingEditor: null
+        };
+    },
+    mounted: function() {
+        this.mattingEditor = this.$refs.mattingEditor;
+
+
+        this.mattingEditor.importMatting({
+            content : '{"version":"0.2.4","sourceImage":"https://st-gdx.dancf.com/gaodingx/409590/clip/20180431-003652-1.jpg","imageHeight":806,"imageWidth":620,"backgroundColor":null,"featheringRadius":0,"brushSize":20,"lines":[{"action":"keep","points":[328.91144403877644,329.5545291451594,328.2869948382225,332.6767751479291,325.16474883545277,341.4190639556844,323.2914012337909,347.66355596122384,320.79360443157515,355.7813955684252,318.29580762935933,363.8992351756265,315.79801082714357,372.6415239833817,313.9246632254817,379.51046518947516,312.0513156238199,385.1305079944607,311.42686642326595,388.87720319778435,310.17796802215804,393.248347601662,309.5535188216041,396.3705936044317,308.3046204204962,398.8683904066475,307.6801712199422,401.36618720886327],"color":1666298,"size":12.488984011078937,"alpha":0.8},{"action":"drop","points":[444.4345461412566,365.77258277728833,443.81009694070264,370.76817638171985,442.5611985395947,378.26156678836725,441.9367493390408,390.1261015988922,440.06340173737897,403.8639840110791,438.81450333627106,420.7241124260356,435.69225733350135,438.2086900415461,433.19446053128553,454.4443692559488,430.0722145285158,471.30449767090533,429.44776532796186,477.54898967644476,428.19886692685395,483.16903248143035,427.5744177263,486.2912784842],"color":16203108,"size":12.488984011078937,"alpha":0.8},{"action":"keep","points":[305.391034098968,570.036259663924,305.391034098968,572.6401620175857,306.69298527579895,575.2440643712475,307.99493645262976,577.8479667249092,307.99493645262976,581.7538202554018,309.2968876294607,585.6596737858945,310.5988388062915,589.565527316387,311.9007899831224,593.4713808468797,311.9007899831224,597.3772343773722,313.20274115995323,602.5850390846957,313.20274115995323,605.1889414383575,313.20274115995323,609.0947949688501,314.50469233678416,611.6986973225119,314.50469233678416,614.3025996761736,314.50469233678416,616.9065020298353,315.806643513615,619.5104043834971,315.806643513615,622.1143067371588,315.806643513615,626.0201602676514,317.1085946904459,628.6240626213132,317.1085946904459,631.2279649749748,318.4105458672767,633.8318673286367,318.4105458672767,637.7377208591292,318.4105458672767,640.341623212791,319.71249704410764,644.2474767432836,319.71249704410764,648.1533302737762,319.71249704410764,650.7572326274379,321.01444822093845,653.3611349810997,321.01444822093845,655.9650373347614,322.3163993977694,658.5689396884231,322.3163993977694,661.172842042085],"color":1666298,"size":26.039023536617403,"alpha":0.8},{"action":"drop","points":[446.8343493717804,603.3098194305526,446.8343493717804,609.671965799825,446.8343493717804,619.2151853537337,446.8343493717804,631.9394780922785,445.77399164356837,644.6637708308234,442.5929184589321,657.3880635693682,442.5929184589321,664.8105676668528,440.47220300250797,671.1727140361252,440.47220300250797,675.4141449489734,439.41184527429596,678.5952181336097,439.41184527429596,681.776291318246,438.35148754608383,684.9573645028821,438.35148754608383,688.1384376875184,438.35148754608383,690.2591531439425,438.35148754608383,692.3798686003666],"color":16203108,"size":21.20715456424144,"alpha":0.8}]}'
+        });
+    },
+    methods: {
+        uploadFile(file) {
+            var formData = new FormData();
+
+            formData.append('smfile', file);
+            formData.append('file_id', 0);
+
+            return fetch('http://sm.ms/api/upload?inajax=1&ssl=0', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(data){
+                return {
+                    url: data.data.url
+                };
+            });
+        },
+        uploadImage(imageBlob) {
+            return this.uploadFile(imageBlob);
+        },
+        uploadByFile(e) {
+            var files = e.target.files;
+
+            this.$refs.mattingEditor.importMattingByFile(files[0]);
+        },
+        uploadByURL() {
+            var url = window.prompt('输入地址');
+
+            if(url) {
+                this.mattingEditor.importMattingByImage(url);
+            }
+        }
+    }
+});
+</script>
+</body>
+</html>
