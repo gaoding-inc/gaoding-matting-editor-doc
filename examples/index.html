@@ -37,8 +37,8 @@
         <input id="uploadFile" type="file" class="btn" @change="uploadByFile($event)"></input>
         <button class="btn" @click="uploadByURL">URL导入</button>
     </div>
+
     <matting-editor ref="mattingEditor" :options="mattingEditorOptions"></matting-editor>
-    <matting-tools v-if="mattingEditor" :matting="mattingEditor"></matting-tools>
 </div>
 
 <script>
